@@ -1,0 +1,12 @@
+.idea/
+build/
+cmake-build-debug/
+
+*.write
+*.csv
+*.ply
+*.log
+external/
+.cache/
+local/
+src/temp.cpp

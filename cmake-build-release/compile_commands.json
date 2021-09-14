@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/everett/Repositories/research/projects/iimage/cmake-build-release",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DGFLAGS_IS_A_DLL=0 -isystem /usr/local/Cellar/opencv/4.5.3_2/include/opencv4 -isystem /usr/local/include -pthread -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -std=gnu++11 -o CMakeFiles/iimage.dir/src/main.cpp.o -c /Users/everett/Repositories/research/projects/iimage/src/main.cpp",
+  "file": "/Users/everett/Repositories/research/projects/iimage/src/main.cpp"
+}
+]
