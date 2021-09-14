@@ -1,9 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /Users/everett/Repositories/research/projects/iimage
--- No preference for use of exported glog CMake configuration set, and no hints for include/library directories provided. Defaulting to preferring an installed/exported glog CMake configuration if available.
--- Detected Homebrew with install prefix: /usr/local, adding to CMake search paths.
--- Failed to find installed glog CMake configuration, searching for glog build directories exported with CMake.
--- Failed to find an installed/exported CMake configuration for glog, will perform search for installed glog components.
--- Failed to find glog - Could not find glog include directory, set GLOG_INCLUDE_DIR to directory containing glog/logging.h
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/everett/Repositories/research/projects/iimage/cmake-build-release

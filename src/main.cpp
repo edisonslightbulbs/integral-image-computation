@@ -1,4 +1,21 @@
 #include <opencv2/opencv.hpp>
+#include <unistd.h>
+#include <omp.h>
+
+cv::Mat computeNaiveParallelly(cv::Mat& image)
+{
+    cv::Mat iimage = cv::Mat::zeros(image.rows, image.cols, CV_64FC1);
+    for (int x = 0; x < image.rows; x++) {
+        for (int y = 0; y < image.cols; y++) {
+            for (int ix = 0; ix <= x; ix++) {
+                for (int iy = 0; iy <= y; iy++) {
+                    iimage.at<double>(x, y) += image.at<double>(ix, iy);
+                }
+            }
+        }
+    }
+    return iimage;
+}
 
 cv::Mat computeNaive(cv::Mat& image)
 {
@@ -64,8 +81,7 @@ cv::Mat computeUsingPadding(cv::Mat& image)
     return iimage;
 }
 
-int main()
-{
+void benchmark(){
     cv::TickMeter timer;
     cv::Mat sample = cv::Mat::eye(200, 200, CV_64FC1);
 
@@ -98,4 +114,52 @@ int main()
     computeUsingPadding(sample);
     timer.stop();
     std::cout << "computeUsingPadding (5000*5000): " << timer << std::endl;
+}
+
+void helloOmp(){
+#pragma omp parallel default(none) shared (std::cout)
+    std::cout << "Hello world" << std::endl;
+}
+
+void ompFixRace(){
+#define THREAD_NUM 8
+    omp_set_num_threads(THREAD_NUM); // set number of threads in "parallel" blocks
+
+#pragma omp parallel default(none) shared (std::cout)
+    {
+        usleep(5000 * omp_get_thread_num()); // sleep thread to avoid race condition
+        std::cout << "Number of available threads: " << omp_get_num_threads() << std::endl;
+        std::cout << "Current thread number: " << omp_get_thread_num() << std::endl;
+        std::cout << "Hello, World!" << std::endl;
+
+    }
+}
+
+void ompCritical(){
+#define THREAD_NUM 8
+    omp_set_num_threads(THREAD_NUM); // set number of threads in "parallel" blocks
+
+#pragma omp parallel default(none) shared (std::cout)
+    {
+#pragma omp critical
+        std::cout << "Number of available threads: " << omp_get_num_threads() << std::endl;
+        std::cout << "Current thread number: " << omp_get_thread_num() << std::endl;
+        std::cout << "Hello, World!" << std::endl;
+
+    }
+}
+
+int main()
+{
+    // int val = 10;
+    // std::vector<int> collection(10);
+    // std::fill(collection.begin(), collection.end(), val);
+
+//#pragma omp parallel
+    // {
+    //     for(const auto number: collection){
+    //         std::cout << number * number << std::endl;
+    //     }
+    // }
+    return 0;
 }

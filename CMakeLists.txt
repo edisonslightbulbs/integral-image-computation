@@ -44,6 +44,7 @@ find_package(Git REQUIRED)
 find_package(glog REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(gflags REQUIRED)
+find_package(OpenMP REQUIRED)
 
 option(BUILD_EXAMPLES "Build example" OFF) # default ON
 if(BUILD_EXAMPLES)
@@ -89,6 +90,7 @@ target_link_libraries(iimage
     ${OpenCV_LIBS}
     glog
     gflags
+    OpenMP::OpenMP_CXX
     )
 
 option(EXECUTE_TARGET "Execute post build" ON) # default OFF
